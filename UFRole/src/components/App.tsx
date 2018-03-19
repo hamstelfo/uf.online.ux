@@ -6,13 +6,16 @@ import {UFRoleComponent} from './UFRole';
 const classNames: any = require('../css/styles');
 const classNamesTest: any = require('../css/stylesTest');
 
+import {connect} from 'react-redux';
+
 interface State {
   isModalOpen: boolean;
   roleTestElements: RoleType[];
   selected: number;
+  test: string;
 }
 
-export class App extends React.Component<{}, State> {
+class App extends React.Component<{}, State> {
   constructor(props) {
     super(props);
 
@@ -30,12 +33,23 @@ export class App extends React.Component<{}, State> {
       isModalOpen: false,
       roleTestElements: initRoles(),
       selected: -1,
+      test: ""
     };
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.changeAllRoles = this.changeAllRoles.bind(this);
     this.selectRow = this.selectRow.bind(this);
+  }
+
+  componentDidMount(){
+    try {
+      toastr.success(this.props['test']);
+    }
+    catch (e)
+    {
+      toastr.error(e);
+    }
   }
 
   openModal() {
@@ -98,3 +112,13 @@ export class App extends React.Component<{}, State> {
     );
   }
 };
+
+
+function mapStateToProps(store){
+  return {
+    test: store.test
+  }
+}
+
+//export default connect(mapStateToProps)(App);
+export const AppContainer= connect(mapStateToProps)(App);
