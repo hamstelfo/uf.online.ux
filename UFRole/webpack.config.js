@@ -9,17 +9,21 @@ var SRC_DIR = path.join(__dirname, 'src');
 module.exports = {
   context: SRC_DIR,
   resolve: {
-    extensions: ['.js', '.ts', '.tsx']
+    extensions: ['.js', '.ts', '.tsx', '.css']
   },
   entry: {
     app: './index.tsx',
     vendor: [
+      'core-js',
       'react',
-      'react-dom'
+      'react-dom',
+      'toastr',
     ],
     styles: [
       '../node_modules/bootstrap/dist/css/bootstrap.css',
+      '../node_modules/toastr/build/toastr.css',
       './css/styles.css',
+      './css/stylesTest.css',
     ],
   },
   output: {
@@ -31,18 +35,39 @@ module.exports = {
     inline: true, //Enable watch and live reload
     host: 'localhost',
     noInfo: true,
-    port: 8080
+    port: 8081
   },
   devtool: 'inline-source-map',
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        loader: 'awesome-typescript-loader'
+        loader: 'awesome-typescript-loader',
+        options: {
+          useBabel: true,
+        },
       },
+      // Load css from src with CSS Modules
       {
         test: /\.css$/,
+        exclude: /node_modules/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]',
+              camelCase: true,
+            },
+          },
+        }),
+      },
+      // Load css from node_modules
+      {
+        test: /\.css$/,
+        include: /node_modules/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: 'css-loader',

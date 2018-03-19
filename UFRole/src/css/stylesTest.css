@@ -1,0 +1,26 @@
+/* stylesTest.css: styles just for testing.. */
+
+.animated {
+  -webkit-transition: opacity .15s ease-out, visibility .3s ease-out;
+  transition: opacity .15s ease-out, visibility .3s ease-out;
+}
+
+.modal {
+  display: block;
+}
+
+.modal .modal-dialog {
+  cursor: pointer;
+}
+
+.borderless {
+  border: none;
+}
+
+.big{
+  width: 180px;
+}
+
+.medium{
+  width: 60px;
+}
