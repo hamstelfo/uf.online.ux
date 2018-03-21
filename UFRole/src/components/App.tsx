@@ -7,17 +7,36 @@ const classNames: any = require('../css/styles');
 const classNamesTest: any = require('../css/stylesTest');
 
 import {connect} from 'react-redux';
+import {AppState} from '../redux/reducers';
+import {TestState} from '../redux/reducers/testReducer';
+import {updateFecha} from '../redux/actions/testAction';
 
+/*
 interface State {
   isModalOpen: boolean;
   roleTestElements: RoleType[];
   selected: number;
   test: string;
+}*/
+
+const mapStateToProps = (state: AppState) => {
+  return state
 }
 
-class App extends React.Component<{}, State> {
-  constructor(props) {
+interface AppProps extends AppState{
+  updateFecha: any
+}
+
+export const AppContainer= connect(mapStateToProps, {
+                                                      updateFecha
+                                                    })(
+  class App extends React.Component<AppProps, AppState> {
+//class App extends React.Component<{}, State> {
+  constructor(props: AppProps) {
     super(props);
+    props.updateFecha();
+    //console.log("props.test:");
+    //console.log(props);
 
     const initRoles=() => {
       const roles = [];
@@ -33,7 +52,7 @@ class App extends React.Component<{}, State> {
       isModalOpen: false,
       roleTestElements: initRoles(),
       selected: -1,
-      test: ""
+      testState: new TestState()
     };
 
     this.openModal = this.openModal.bind(this);
@@ -42,15 +61,45 @@ class App extends React.Component<{}, State> {
     this.selectRow = this.selectRow.bind(this);
   }
 
-  componentDidMount(){
-    try {
-      toastr.success(this.props['test']);
+  const localLog = (will: boolean) =>{
+    if (will){
+      console.log("this.props will:");
     }
-    catch (e)
-    {
-      toastr.error(e);
+    else{
+      console.log("this.props did:");
     }
+
+    console.log("this.props:");
+    console.log(this.props);
+    // En tiempo de compilación: this.props.testState.fecha
+    // En tiempo de ejecución: this.props.test.fecha
+
+    console.log(this.props.testState.fecha);
+    console.log(this.props.testState.test);
   }
+    componentDidMount(){
+      try {
+        //this.localLog(false);
+        toastr.success(this.props.testState.test);
+        //setInterval(this.props.updateFecha(), 1000);
+        //setInterval(()=>{console.log(this.props)}, 1000);
+        setInterval(()=>{ this.props.updateFecha(); }, 1000);
+      }
+      catch (e)
+      {
+        toastr.error(e);
+      }
+    }
+
+    componentWillMount(){
+      try {
+        //this.localLog(true);
+      }
+      catch (e)
+      {
+        toastr.error(e);
+      }
+    }
 
   openModal() {
     this.setState({ isModalOpen: true });
@@ -105,20 +154,28 @@ class App extends React.Component<{}, State> {
 
   render() {
     return (
-      <div style={{ textAlign: 'center' }}>
+      <div style={{ textAlign: 'center' }} >
+        <span>{this.props.testState.fecha.toLocaleString()}</span>
         <div>{this.state.roleTestElements.map((rol, i) => this.roleTestRender(rol, i, false))}</div>
         <div>{this.state.roleTestElements.map((rol, i) => this.roleTestRender(rol, i, true))}</div>
       </div>
     );
   }
-};
+}
+);
 
 
-function mapStateToProps(store){
+/*function mapStateToProps(store){
   return {
     test: store.test
   }
-}
+}*/
+/*
+const mapStateToProps = ({test}) => {
+  return {
+    test
+  }
+}*/
 
 //export default connect(mapStateToProps)(App);
-export const AppContainer= connect(mapStateToProps)(App);
+//export const AppContainer= connect(mapStateToProps)(App);

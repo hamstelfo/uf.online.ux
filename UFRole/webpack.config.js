@@ -9,7 +9,10 @@ var SRC_DIR = path.join(__dirname, 'src');
 module.exports = {
   context: SRC_DIR,
   resolve: {
-    extensions: ['.js', '.ts', '.tsx', '.css']
+    extensions: ['.js', '.ts', '.tsx', '.css'],
+    alias: {
+      'redux-devtools': path.join(__dirname, '..', '..', 'src'),
+    }
   },
   entry: {
     app: './index.tsx',
