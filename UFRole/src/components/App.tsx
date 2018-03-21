@@ -10,25 +10,20 @@ import {connect} from 'react-redux';
 import {AppState} from '../redux/reducers';
 import {TestState} from '../redux/reducers/testReducer';
 import {updateFecha} from '../redux/actions/testAction';
-
-/*
-interface State {
-  isModalOpen: boolean;
-  roleTestElements: RoleType[];
-  selected: number;
-  test: string;
-}*/
+import {changeAllRoles} from '../redux/actions/testUFRoleActions';
 
 const mapStateToProps = (state: AppState) => {
   return state
 }
 
 interface AppProps extends AppState{
-  updateFecha: any
+  updateFecha: any,
+  changeAllRoles: any
 }
 
 export const AppContainer= connect(mapStateToProps, {
-                                                      updateFecha
+                                                      updateFecha,
+                                                      changeAllRoles
                                                     })(
   class App extends React.Component<AppProps, AppState> {
 //class App extends React.Component<{}, State> {
@@ -37,7 +32,7 @@ export const AppContainer= connect(mapStateToProps, {
     props.updateFecha();
     //console.log("props.test:");
     //console.log(props);
-
+/*
     const initRoles=() => {
       const roles = [];
       for (var r in RoleType) {
@@ -53,12 +48,12 @@ export const AppContainer= connect(mapStateToProps, {
       roleTestElements: initRoles(),
       selected: -1,
       testState: new TestState()
-    };
+    };*/
 
-    this.openModal = this.openModal.bind(this);
+    /*this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.changeAllRoles = this.changeAllRoles.bind(this);
-    this.selectRow = this.selectRow.bind(this);
+    this.selectRow = this.selectRow.bind(this);*/
   }
 
   const localLog = (will: boolean) =>{
@@ -74,16 +69,14 @@ export const AppContainer= connect(mapStateToProps, {
     // En tiempo de compilación: this.props.testState.fecha
     // En tiempo de ejecución: this.props.test.fecha
 
-    console.log(this.props.testState.fecha);
-    console.log(this.props.testState.test);
+    //console.log(this.props.testState.fecha);
+    //console.log(this.props.testState.test);
   }
     componentDidMount(){
       try {
-        //this.localLog(false);
+        this.localLog(false);
         toastr.success(this.props.testState.test);
-        //setInterval(this.props.updateFecha(), 1000);
-        //setInterval(()=>{console.log(this.props)}, 1000);
-        setInterval(()=>{ this.props.updateFecha(); }, 1000);
+//        setInterval(()=>{ this.props.updateFecha(); }, 1000);
       }
       catch (e)
       {
@@ -93,14 +86,14 @@ export const AppContainer= connect(mapStateToProps, {
 
     componentWillMount(){
       try {
-        //this.localLog(true);
+        this.localLog(true);
       }
       catch (e)
       {
         toastr.error(e);
       }
     }
-
+/*
   openModal() {
     this.setState({ isModalOpen: true });
   }
@@ -139,7 +132,7 @@ export const AppContainer= connect(mapStateToProps, {
 
     this.setState({roleTestElements: roles});
     toastr.success("All roles changed!")
-  }
+  }*/
 
   roleTestRender = (idRole: number, index: number, big: boolean) => {
     const _big: string = (big)?classNamesTest.big:'';
@@ -147,7 +140,7 @@ export const AppContainer= connect(mapStateToProps, {
 
     return (
       <div key={`c_${key}`} className={`${classNames.uFRoleContainer} ${_big} text-center`} style={{ marginTop: '50px' }}>
-        <UFRoleComponent roleId={idRole} onRightClick={this.changeAllRoles} />
+        <UFRoleComponent roleId={idRole} onRightClick={this.props.changeAllRoles} />
       </div>
     );
   }
@@ -156,8 +149,8 @@ export const AppContainer= connect(mapStateToProps, {
     return (
       <div style={{ textAlign: 'center' }} >
         <span>{this.props.testState.fecha.toLocaleString()}</span>
-        <div>{this.state.roleTestElements.map((rol, i) => this.roleTestRender(rol, i, false))}</div>
-        <div>{this.state.roleTestElements.map((rol, i) => this.roleTestRender(rol, i, true))}</div>
+        <div>{this.props.testUFRoleState.roleTestElements.map((rol, i) => this.roleTestRender(rol, i, false))}</div>
+        <div>{this.props.testUFRoleState.roleTestElements.map((rol, i) => this.roleTestRender(rol, i, true))}</div>
       </div>
     );
   }

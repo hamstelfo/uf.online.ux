@@ -7,23 +7,6 @@ import {Provider} from 'react-redux';
 import {reducers} from './redux/reducers';
 import {store} from './store';
 
-/*
-const initialState = {
-  test: "popopo ppi"
-}
-
-const popo = (state=initialState, action) => {
-  switch (action.type)
-  {
-    default:
-      return state;
-  }
-}*/
-
-//const store= createStore(reducers, {}, applyMiddleware(logger));
-
-//console.log(reducers);
-
 render(
   <Provider store={store}>
   <AppContainer />
