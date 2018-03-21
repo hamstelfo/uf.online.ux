@@ -3,12 +3,11 @@
  import {TestUFRoleState, testUFRoleReducer} from './testUFRoleReducer';
 
 export interface AppState{
-  testState: TestState,
-  testUFRoleState: TestUFRoleState,
+  test: TestState,
+  testUFRole: TestUFRoleState,
 }
-//console.log(test);
 
  export const reducers = combineReducers<AppState>({
-   testState: testReducer,
-   testUFRoleState: testUFRoleReducer,
+   test: testReducer,
+   testUFRole: testUFRoleReducer,
  })

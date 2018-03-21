@@ -4,8 +4,6 @@ import {RoleType} from '../models/UFModels';
 import {UFRoleShowMode} from '../models/auxModels';
 const classNames: any = require('../css/styles');
 
-
-
 interface Props extends React.Props<{}> {
   onRightClick?: (event) => void;
   roleId: RoleType;

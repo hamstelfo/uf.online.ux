@@ -2,8 +2,7 @@ import actionTypes from './actionTypes';
 import {RoleType} from '../../models/UFModels';
 import * as toastr from 'toastr';
 
-export const changeAllRoles = (event) =>{
-  event.preventDefault();
+export const changeAllRoles = () =>{
   var numRoleTypes= Object.keys(RoleType).length / 2;
 
   const roles = (roleTestElements) => {
@@ -12,8 +11,6 @@ export const changeAllRoles = (event) =>{
     {
       roles[i]= (roles[i] + 1) % numRoleTypes;
     }
-
-    //this.setState({roleTestElements: roles});
 
     toastr.success("All roles changed!")
 
