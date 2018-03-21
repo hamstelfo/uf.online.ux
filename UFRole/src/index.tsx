@@ -5,6 +5,8 @@ import logger from 'redux-logger';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {reducers} from './redux/reducers';
+import {store} from './store';
+
 /*
 const initialState = {
   test: "popopo ppi"
@@ -18,7 +20,7 @@ const popo = (state=initialState, action) => {
   }
 }*/
 
-const store= createStore(reducers, {}, applyMiddleware(logger));
+//const store= createStore(reducers, {}, applyMiddleware(logger));
 
 //console.log(reducers);
 
