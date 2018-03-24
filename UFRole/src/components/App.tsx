@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as toastr from 'toastr';
 import { Modal } from './Modal';
-import {UFRoleComponent} from './UFRole';
+import UFRoleComponent from './UFRole';
 const classNames: any = require('../css/styles');
 const classNamesTest: any = require('../css/stylesTest');
 

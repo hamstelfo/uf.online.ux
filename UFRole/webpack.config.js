@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+var isDev= true;
 var DIST_DIR = path.join(__dirname, 'dist');
 var SRC_DIR = path.join(__dirname, 'src');
 
@@ -31,7 +31,7 @@ module.exports = {
   },
   output: {
     path: DIST_DIR,
-    filename: '[chunkhash].[name].js',
+    filename: `[name]${isDev ? '' : '[chunkhash:8]'}.js`,
   },
   devServer: {
     contentBase: DIST_DIR, //Content base
