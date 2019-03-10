@@ -11,3 +11,11 @@ typings/
 yarn.lock
 *.log
 react-examples
+bin
+obj
+Properties
+UFUX.csproj
+UFUX.csproj.user
+Web.config
+Web.Debug.config
+Web.Release.config

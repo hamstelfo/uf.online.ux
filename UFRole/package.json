@@ -1,21 +1,24 @@
 {
-  "name": "01-react-concepts-02-state",
-  "version": "1.0.0",
-  "description": "Sample showing how state works with React components",
-  "main": "index.js",
+  "name": "@hamstelfo/ufrole",
+  "version": "1.0.5",
+  "description": "UNIFUTBOL OnLine component",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot"
+    "start": "webpack-dev-server --hot",
+    "test": "jest",
+    "transpile": "babel src -d dist --copy-files",
+    "prepublishOnly": "npm run transpile"
   },
-  "author": "Lemoncode",
-  "license": "ISC",
+  "author": "unifutbol",
+  "license": "CC-BY-NC-ND-3.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lemoncode/react-training-ts.git"
+    "url": "git+https://github.com/hamstelfo/uf.online.ux/.git"
   },
   "bugs": {
-    "url": "https://github.com/Lemoncode/react-training-ts/issues"
+    "url": "https://github.com/hamstelfo/uf.online.ux/tree/master/UFRole/issues"
   },
-  "homepage": "https://github.com/Lemoncode/react-training-ts#readme",
+  "homepage": "https://github.com/hamstelfo/uf.online.ux/tree/master/UFRole#readme",
   "dependencies": {
     "bootstrap": "^3.3.7",
     "jquery": "^3.1.1",
@@ -42,11 +45,15 @@
     "@types/react": "^15.0.9",
     "@types/react-dom": "^0.14.23",
     "awesome-typescript-loader": "^3.0.4-rc.2",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "2.0.0-rc.3",
     "file-loader": "^0.10.0",
     "html-webpack-plugin": "^2.28.0",
+    "jasmine": "^3.3.1",
+    "jest": "^24.3.1",
     "react-hot-loader": "^4.0.0",
     "redux-devtools-extension": "^2.13.2",
     "style-loader": "^0.13.1",

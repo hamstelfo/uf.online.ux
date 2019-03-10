@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2015",
     "module": "commonjs",
+    "skipLibCheck": true,
     "declaration": false,
     "noImplicitAny": false,
     "jsx": "react",
