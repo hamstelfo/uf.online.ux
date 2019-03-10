@@ -89,7 +89,7 @@ class App extends React.Component<AppProps, AppState> {
   render() {
     return (
       <div style={{ textAlign: 'center' }} >
-        <span>{this.props.test.fecha.toLocaleString()}</span>
+        <span>{this.props.test.fecha.toLocaleString()}</span>popo
         <div>{this.props.testUFRole.roleTestElements.map((rol, i) => this.roleTestRender(rol, i, false))}</div>
         <div>{this.props.testUFRole.roleTestElements.map((rol, i) => this.roleTestRender(rol, i, true))}</div>
       </div>
